@@ -7,7 +7,7 @@ namespace App;
 use Gando\Partner\Api\Client;
 use Gando\Partner\Models\Operations\CreatePartnerWebhookSubscriptionBody;
 use Gando\Partner\Models\Operations\UpdatePartnerWebhookSubscriptionBody;
-use Gando\Partner\Models\Operations\WebhooksListPartnerWebhookSubscriptionItem;
+use Gando\Partner\Models\Operations\WebhooksListV1WebhookSubscriptionItem;
 
 final class WebhookTest
 {
@@ -208,7 +208,7 @@ final class WebhookTest
         ConsoleOutput::line('Endpoint Status Code', $response->object->data->statusCode);
     }
 
-    private function printWebhook(WebhooksListPartnerWebhookSubscriptionItem $webhook): void
+    private function printWebhook(WebhooksListV1WebhookSubscriptionItem $webhook): void
     {
         ConsoleOutput::line('Webhook ID', $webhook->id);
         ConsoleOutput::line('URL', $webhook->url);

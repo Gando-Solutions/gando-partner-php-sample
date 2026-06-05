@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App;
 
 use Gando\Partner\Api\Client;
+use Gando\Partner\Models\Operations\DepositsListDepositItem;
 use Gando\Partner\Models\Operations\DepositsListRequest;
-use Gando\Partner\Models\Operations\Item;
+use Gando\Partner\Models\Operations\DepositsRetrieveDepositItem;
 use Gando\Partner\Models\Operations\PartnerCaptureBody;
-use Gando\Partner\Models\Operations\PartnerCautionItem;
 use Gando\Partner\Models\Operations\PartnerCreateDepositBody;
-use Gando\Partner\Models\Operations\PartnerCreateDepositResponse;
+use Gando\Partner\Models\Operations\V1CreateDepositResponse;
 use Gando\Partner\Models\Operations\PartnerDepositEmailsBody;
 use Gando\Partner\Models\Operations\PartnerPatchDepositBody;
 use Gando\Partner\Models\Operations\PartnerSendDepositMailBody;
@@ -242,7 +242,7 @@ final class DepositTest
 
         ConsoleOutput::heading('Send deposit emails');
         ConsoleOutput::envelope($response->object->success, $response->object->message);
-        ConsoleOutput::line('Link', $response->object->data->link);
+        ConsoleOutput::line('Recipients', count($response->object->data->results));
 
         foreach ($response->object->data->results as $result) {
             ConsoleOutput::line(
@@ -297,7 +297,7 @@ final class DepositTest
         ConsoleOutput::line('Size Bytes', strlen($response->bytes));
     }
 
-    private function printCreateDeposit(PartnerCreateDepositResponse $deposit): void
+    private function printCreateDeposit(V1CreateDepositResponse $deposit): void
     {
         ConsoleOutput::line('Deposit ID', $deposit->id);
         ConsoleOutput::line('Reference', $deposit->reference);
@@ -307,7 +307,7 @@ final class DepositTest
         ConsoleOutput::optionalLine('Deposit URL', $deposit->depositUrl);
     }
 
-    private function printDepositItem(Item $deposit): void
+    private function printDepositItem(DepositsListDepositItem $deposit): void
     {
         ConsoleOutput::line('Deposit ID', $deposit->id);
         ConsoleOutput::line('Reference', $deposit->reference);
@@ -320,7 +320,7 @@ final class DepositTest
         ConsoleOutput::blank();
     }
 
-    private function printDepositDetail(PartnerCautionItem $deposit): void
+    private function printDepositDetail(DepositsRetrieveDepositItem $deposit): void
     {
         ConsoleOutput::line('Deposit ID', $deposit->id);
         ConsoleOutput::line('Reference', $deposit->reference);

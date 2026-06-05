@@ -9,7 +9,7 @@ use Gando\Partner\Models\Components\ParticulierClient;
 use Gando\Partner\Models\Components\ParticulierClientClientType;
 use Gando\Partner\Models\Components\ParticulierPartnerClientPatch;
 use Gando\Partner\Models\Operations\ClientsCreateResponse;
-use Gando\Partner\Models\Operations\ClientsListPartnerClientItem;
+use Gando\Partner\Models\Operations\ClientsListClientItem;
 
 final class ClientTest
 {
@@ -109,7 +109,7 @@ final class ClientTest
         ConsoleOutput::line('HTTP Status', $response->statusCode);
     }
 
-    private function printClient(ClientsListPartnerClientItem $client): void
+    private function printClient(ClientsListClientItem $client): void
     {
         ConsoleOutput::line('Client ID', $client->id);
         ConsoleOutput::line('Email', $client->email);
